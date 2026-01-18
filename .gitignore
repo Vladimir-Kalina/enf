@@ -1,0 +1,166 @@
+# venv/
+# .pylintrc
+# __pycache__/
+
+# .vscode
+# .idea
+# .env
+# .oldenv
+# .djangolog
+# security.log
+
+# db.sqlite3
+# media/
+# debug.log
+
+#################################################
+#                .gitignore для Django          #
+#          Полная версия с комментариями        #
+#################################################
+
+### ========== PYTHON ========== ###
+# Кэш Python (байт-код)
+__pycache__/          # Папка с кэшированными .pyc файлами
+*.py[cod]             # Файлы .pyc, .pyo, .pyd
+*$py.class            # Компилированные классы Java Jython
+*.pyo                 # Оптимизированные Python файлы
+*.so                  # C-расширения
+
+# Виртуальные окружения (выберите один вариант)
+.venv/                # Современное название (рекомендуется)
+venv/                 # Классическое название
+env/                  # Альтернативное название
+ENV/                  # Вариант для Windows
+env.bak/              # Резервные копии окружений
+venv.bak/
+
+# Дистрибутивы и сборка
+build/                # Папка сборки (setup.py build)
+develop-eggs/         # Яйца для разработки
+dist/                 # Дистрибутивные пакеты (pip, wheel)
+downloads/            # Скачанные пакеты
+eggs/                 # Python eggs
+.eggs/                # Скрытые eggs
+lib/                  # Локальные библиотеки
+lib64/                # Локальные библиотеки (64-bit)
+parts/                # Части сборки
+sdist/                # Исходные дистрибутивы
+var/                  # Переменные данные
+wheels/               # Wheel пакеты
+*.egg-info/           # Метаданные пакетов
+.installed.cfg        # Конфиг установки
+*.egg                 # Egg файлы
+
+### ========== DJANGO ========== ###
+# Базы данных
+db.sqlite3            # SQLite база данных (тестовая)
+db.sqlite3-journal    # Журнал SQLite
+*.sqlite3             # Любые SQLite файлы
+
+# Настройки
+local_settings.py     # Локальные настройки (не в репозитории!)
+settings/local.py     # Альтернативные локальные настройки
+
+# Логи
+*.log                 # Все логи приложения
+debug.log             # Логи отладки
+security.log          # Логи безопасности
+.djangolog            # Специфичные логи Django
+
+# Статические файлы (если собираются при деплое)
+staticfiles/          # Собранные статические файлы
+
+# Медиа файлы - ВНИМАНИЕ:
+# Игнорируем содержимое media, но оставляем саму папку!
+media/*               # ВСЁ содержимое папки media
+!media/.gitkeep       # ИСКЛЮЧЕНИЕ: этот файл остаётся в репозитории
+
+# Internationalization
+*.pot                 # Файлы шаблонов перевода
+*.po                  # Файлы перевода
+
+### ========== СРЕДА ОКРУЖЕНИЯ ========== ###
+.env                  # Основной файл окружения
+.env.local            # Локальные настройки
+.env.*.local          # Локальные настройки для разных окружений
+.env.development      # Для разработки
+.env.production       # Для продакшена
+.env.test             # Для тестирования
+.oldenv               # Старые файлы окружения
+
+### ========== IDE И РЕДАКТОРЫ ========== ###
+# VS Code
+.vscode/              # Настройки VS Code
+!.vscode/settings.json.example  # Пример настроек (не игнорировать)
+!.vscode/tasks.json.example
+!.vscode/launch.json.example
+!.vscode/extensions.json.example
+
+# PyCharm / IntelliJ IDEA
+.idea/                # Настройки JetBrains IDE
+*.iml                 # Модули IDEA
+*.ipr                 # Проекты IDEA
+*.iws                 # Рабочие пространства IDEA
+
+# Другие редакторы
+*.swp                 # Swap файлы Vim
+*.swo                 # Swap файлы Vim
+*~                    # Резервные копии
+.project              # Eclipse проекты
+.pydevproject         # PyDev проекты
+
+### ========== ОПЕРАЦИОННЫЕ СИСТЕМЫ ========== ###
+# macOS
+.DS_Store             # Атрибуты папок macOS
+.DS_Store?            # Временные .DS_Store
+._*                   # Ресурсные вилки macOS
+.Spotlight-V100       # Индексы Spotlight
+.Trashes              # Корзина
+ehthumbs.db           # Кэш иконок Windows
+
+# Windows
+Thumbs.db             # Кэш миниатюр Windows
+Desktop.ini           # Настройки папок Windows
+
+# Linux
+*~                    # Резервные копии
+.fuse_hidden*         # FUSE файлы
+
+### ========== ТЕСТИРОВАНИЕ ========== ###
+.coverage             # Отчёт coverage.py
+htmlcov/              # HTML отчёт coverage
+.tox/                 # Виртуальные окружения tox
+.pytest_cache/        # Кэш pytest
+.mypy_cache/          # Кэш mypy
+.pytest_cache/        # Кэш pytest
+
+### ========== ЛИНТЕРЫ И ФОРМАТТЕРЫ ========== ###
+.pylintrc             # Конфиг pylint (если не шарим)
+.flake8               # Конфиг flake8
+.mypy.ini             # Конфиг mypy
+.yapfignore           # Игнорируемые файлы для yapf
+.autopep8             # Конфиг autopep8
+
+### ========== JUPYTER NOTEBOOK ========== ###
+.ipynb_checkpoints/   # Чекпоинты Jupyter
+*.ipynb_checkpoints   # Чекпоинты (альтернатива)
+
+### ========== БЭКАПЫ БАЗ ДАННЫХ ========== ###
+*.dump                # Дампы баз данных
+*.backup              # Резервные копии
+*.bak                 # Резервные копии (альтернатива)
+backup/               # Папка с бэкапами
+
+### ========== ДОПОЛНИТЕЛЬНО ========== ###
+# Docker
+docker-compose.override.yml  # Локальные настройки Docker
+
+# Миграции БД (ОСТОРОЖНО! Игнорируйте только если понимаете последствия)
+# migrations/           # Папка с миграциями Django (обычно НЕ игнорируется!)
+
+# Сессии
+*.session             # Файлы сессий
+
+# Кэш
+.cache/               # Общий кэш
+*.cache               # Кэш файлы
