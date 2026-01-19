@@ -46,7 +46,7 @@ class SizeModel(models.Model):
     
 
 class ProductSizeModel(models.Model):
-    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='product_size')
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='product_sizes')
     size = models.ForeignKey(SizeModel, on_delete=models.CASCADE)
     stock = models.PositiveBigIntegerField(default=0)
     
