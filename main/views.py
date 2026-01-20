@@ -43,10 +43,11 @@ class IndexView(TemplateView):
     
 class CatalogView(TemplateView):
     template = 'main/base.html'
+    template_name = 'main/base.html'
     FILTER_MAPPING = {
         'color': lambda queryset, value: queryset.filter(color__iexact=value),
-        'min_price': lambda queryset, value: queryset.filter(price_gte=value),
-        'max_price': lambda queryset, value: queryset.filter(price_lte=value),
+        'min_price': lambda queryset, value: queryset.filter(price__gte=value),
+        'max_price': lambda queryset, value: queryset.filter(price__lte=value),
         'size': lambda queryset, value: queryset.filter(product_sizes__size__name=value),
     }
     def get_context_data(self, **kwargs):
@@ -76,7 +77,7 @@ class CatalogView(TemplateView):
         context.update({
             'categories': categories,
             'products': products,
-            'current_category': category_slug,
+            'current_category': current_category, #category_slug
             'filter_params': filter_params,
             'sizes': SizeModel.objects.all(),
             'search_query': query or ''
@@ -92,25 +93,34 @@ class CatalogView(TemplateView):
     
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs) 
-        if request.headers.get('HX-Reequest'):
+        is_htmx = request.headers.get('HX-Request')
+        if is_htmx:
             if context.get('show_search'):
-            
                 return TemplateResponse(request, 'main/search_input.html', context)
-            elif context.get('reset_search'):
-                return TemplateResponse(request, 'main/search_button.html', {})     
             
-            template = 'main/filter_madal.html' if request.GET.get('show_filters') == 'true' else 'main/catalog.html' 
+            elif context.get('reset_search'):
+                return TemplateResponse(request, 'main/search_button.html', context)  # {} -> context   
+            
+            template = 'main/filter_modal.html' if request.GET.get('show_filters') == 'true' else 'main/catalog.html' 
             return TemplateResponse(request, template, context)
+            
+            
+        if hasattr(self, 'template_name') and self.template_name:
+            return TemplateResponse(request, self.template_name, context)
+        else:
+            # ⚠️ Запасной вариант на случай проблем
+            from django.http import HttpResponse
+            return HttpResponse("Error: template_name not set", status=500)    
         
-        return TemplateResponse(request, self.template_name, context)
     
     
     
 class ProductDetailView(DetailView):
         model = ProductModel
-        template_name = 'main/base.html'
+        template_name = 'main/product_detail.html'
         slug_field = 'slug'
         slug_url_kwarg = 'slug'
+        context_object_name = 'product'
         
         def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
@@ -125,9 +135,9 @@ class ProductDetailView(DetailView):
             self.object = self.get_object()
             context = self.get_context_data(**kwargs)
             if request.headers.get('HX-Request'):
-                return TemplateResponse(request, 'nain/product_detail.html', context)
+                return TemplateResponse(request, 'main/product_detail.html', context)
             
-            raise TemplateResponse(request, self. template_name, context)
+            return TemplateResponse(request, self.template_name, context)
     
 
         
