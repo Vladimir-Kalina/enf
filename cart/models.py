@@ -60,7 +60,7 @@ class Cart(models.Model):
         except CartItem.DoesNotExist:
             return False
         
-    def clean(self):
+    def clear(self):
         self.items.all().delete()
     
 
