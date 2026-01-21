@@ -131,6 +131,7 @@ class ProductDetailView(DetailView):
             ).exclude(id=product.id)[:4]
             context['current_category'] = product.category.slug
             return context
+        
         def get(self, request, *args, **kwargs):
             self.object = self.get_object()
             context = self.get_context_data(**kwargs)
